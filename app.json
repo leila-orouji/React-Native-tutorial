@@ -1,0 +1,12 @@
+{
+  "name": "muppalaConfusion",
+  "displayName": "muppalaConfusion",
+  "expo": {
+    "name": "muppalaConfusion",
+    "slug": "muppalaConfusion",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
