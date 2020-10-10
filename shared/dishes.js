@@ -2,7 +2,7 @@ export const DISHES = [
     {
         id: '0',
         name: 'UthaPizza',
-        image: '/assets/images/frymire.png',
+        image: './images/frymire.png',
         category: 'mains',
         featured: true,
         label: 'Hot',
@@ -13,7 +13,7 @@ export const DISHES = [
       {
         id: '1',
         name: 'SecondPizza',
-        image: '/assets/images/boat.png',
+        image: './images/boat.png',
         category: 'mains',
         featured: false,
         label: 'Cool',
@@ -24,7 +24,7 @@ export const DISHES = [
       {
         id: '4',
         name: 'UthaPizza',
-        image: '/assets/images/pool.png',
+        image: './images/pool.png',
         category: 'apetizer',
         featured: true,
         label: 'Hot',
@@ -35,7 +35,7 @@ export const DISHES = [
       {
         id: '3',
         name: 'forthPizza',
-        image: '/assets/images/fruits.png',
+        image: './images/fruits.png',
         category: 'mains',
         featured: true,
         label: '',
