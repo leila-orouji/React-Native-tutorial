@@ -1,0 +1,170 @@
+{
+  "dishes": [
+      { 
+      "id": "0",
+      "name": "UthaPizza",
+      "image": "images/pool.png",
+      "category": "mains",
+      "featured": true,
+      "label": "Hot",
+      "price": "4.99",
+      "description": "First"
+      
+      },
+      {
+          "id": "1",
+          "name": "SecondPizza",
+          "image": "images/boat.png",
+          "category": "mains",
+          "featured": false,
+          "label": "Cool",
+          "price": "9",
+          "description": "Second"
+          
+      },
+      {
+          "id": "3",
+          "name": "UthaPizza",
+          "image": "images/pool.png",
+          "category": "apetizer",
+          "featured": true,
+          "label": "Hot",
+          "price": "7",
+          "description": "third"
+         
+      },
+      {
+          "id": "4",
+          "name": "forthPizza",
+          "image": "images/fruits.png",
+          "category": "mains",
+          "featured": true,
+          "label": "",
+          "price": "4.99",
+          "description": "forth"
+          
+       }
+
+    ],
+
+  "Comments": [
+        {
+         "dishId": 0,
+         "id": 0,
+          "rating":2,
+          "comment":"dhskdjhfkds",
+          "auther":"Leila",
+          "date":""
+      },
+      {
+        "dishId": 0,
+        "id": 1,
+        "rating":5,
+        "comment":"",
+        "auther":"",
+        "date":""
+      },
+     
+        {
+            "dishId": 1,
+            "id": 0,
+            "rating":2,
+            "comment":"dhskdjhfkds",
+            "auther":"Leila",
+            "date":""
+        },
+        {
+          "dishId": 1,
+          "id": 1,
+          "rating":5,
+          "comment":"",
+          "auther":"",
+          "date":""
+      },
+        {
+            "dishId": 3,
+            "id":0,
+            "rating":2,
+            "comment":"dhskdjhfkds",
+            "auther":"Leila",
+            "date":""
+        },
+        {
+          "dishId": 3,
+          "id":1,
+          "rating":5,
+          "comment":"Perfect",
+          "auther":"Jim",
+          "date":"154/2020/5"
+      },
+        {
+            "dishId": 4,
+            "id": 0,
+            "rating":2,
+            "comment":"dhskdjhfkds",
+            "auther":"Leila",
+            "date":""
+        },
+        {
+          "dishId": 4,
+          "id":1,
+          "rating":5,
+          "comment":"Great Food !",
+          "auther":"Ali",
+          "date":"4/3/2020"
+      }
+        
+  ],
+
+  "promotions": [{
+    "id": "string",
+    "name": "string",
+    "image": "string",
+    "label": "string",
+    "price": "string",
+    "featured": "boolean",
+    "description": "string"
+
+  }
+],
+"Feedback": [
+  {
+    "firstname": "string",
+    "lastname": "string",
+    "telnum": "number",
+    "email": "string",
+    "agree": "boolean",
+    "contacttype": "string",
+    "message": "string"
+  }
+],
+
+" Corporates": [
+  {
+    "id": "1",
+    "name": "Loren",
+    "image": "string",
+    "featured": true,
+    "jobTitle": "cheif",
+    "description": "sdddsdfcesfef"
+  },
+  {
+    "id": "2",
+    "name": "thghrghr",
+    "image": "string",
+    "featured": true,
+    "jobTitle": "chief2",
+    "description": "sdddsdfcesfef"
+  },
+  {
+    "id": "3",
+    "name": "joe",
+    "image": "string",
+    "featured": true,
+    "jobTitle": "chief3",
+    "description": "sdddsdfcesfef"
+  }
+
+]
+
+}

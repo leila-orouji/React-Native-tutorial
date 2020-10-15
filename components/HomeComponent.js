@@ -1,9 +1,8 @@
 import React from 'react';
 import{ScrollView, View, Text} from 'react-native';
 import {Card} from 'react-native-elements';
-import {DISHES} from './../shared/dishes';
-import {PROMOTIONS} from '../shared/promotions';
-import {LEADERS} from '../shared/leaders';
+import {baseUrl} from '../shared/baseUrl';
+import {connect} from 'react-redux';
 
 function RenderItem(props){
     const item = props.item;
@@ -11,7 +10,7 @@ function RenderItem(props){
         return(
             <Card featuredTitle={item.name}
                   featuredSubtitle={item.designation}
-                  image={require('./images/images.jpg')}>
+                  image={{uri: baseUrl+ item.image}}>
                 <Text style={{margin: 10}}>
                     {item.description}
                 </Text>
@@ -25,14 +24,6 @@ function RenderItem(props){
 
 class Home extends React.Component{
 
-    constructor(props){
-        super(props);
-        this.state = {
-            dishes: DISHES,
-            promotions: PROMOTIONS,
-            leaders: LEADERS
-        }
-    }
     static navigationOptions = {
         title: 'Home'
     }
@@ -40,13 +31,18 @@ class Home extends React.Component{
     render(){
         return(
             <ScrollView>
-                <RenderItem item={this.state.dishes.filter((dish) => dish.featured)[0]}/>
-                <RenderItem item={this.state.leaders.filter((leader) => leader.featured)[0]}/>
-                <RenderItem item={this.state.promotions.filter((promo) => promo.featured)[0]}/>
-
+                <RenderItem item={this.props.dishes.dishes.filter((dish) => dish.featured)[0]}/>
+                <RenderItem item={this.props.leaders.leaders.filter((leader) => leader.featured)[0]}/>
+                <RenderItem item={this.props.promotions.promotions.filter((promo) => promo.featured)[0]}/>
             </ScrollView>
         )
     }
 }
-
-export default Home;
+const mapStateToProps = state =>{
+    return{
+        dishes: state.dishes,
+        promotions: state.promotions,
+        leaders: state.leaders
+    }
+}
+export default connect(mapStateToProps)(Home);
