@@ -143,3 +143,15 @@ export const commentsFailed =(error) => {
         payload : error
     }
 }
+
+// -------------------------------------------------------Favorite
+export const postFavorite = (dishId) => (dispatch) => {
+    setTimeout(() => {
+        dispatch(addFavorite(dishId))
+    }, 2000)
+}
+
+export const addFavorite = (dishId) => ({
+    type: actionTypes.ADD_FAVORITE,
+    payload: dishId
+})

@@ -5,6 +5,7 @@ import {DISHES} from './../shared/dishes';
 import {COMMENTS} from '../shared/comments';
 import{baseUrl} from '../shared/baseUrl';
 import{connect} from 'react-redux';
+import {postFavorite} from '../redux/actionCreator';
 
 function RenderDish(props){
     const dish = props.dish;
@@ -55,15 +56,9 @@ function RenderComments(props){
 
 class DishDetail extends React.Component{
 
-    constructor(props){
-        super(props);
-        this.state = {
-            favorites: []
-        };
-    }
-
     markedFavorite(dishId){
-        this.setState({ favorites: this.state.favorites.concat(dishId)})
+        // this.setState({ favorites: this.state.favorites.concat(dishId)})
+        this.props.postFavorite(dishId)
     }
     static navigationOptions = {
         title: 'Dish Details'
@@ -71,12 +66,11 @@ class DishDetail extends React.Component{
 
     render(){
         const {dishId} =this.props.route.params;
-        // console.log('dish detaillllllll :', this.props)
-// [+dishId ] => turn the string to number
+     // [+dishId ] => turn the string to number
         return(
             <ScrollView>
                 <RenderDish dish={this.props.dishes.dishes.filter( dish => dish.id === dishId)[0]} 
-                            favorite={this.state.favorites.some(el => el===dishId)}
+                            favorite={this.props.favorites.some(el => el===dishId)}
                             onPress={() => this.markedFavorite(dishId)} />
                 <RenderComments comments={this.props.comments.comments.filter( comment => comment.dishId === dishId)} />    
             </ScrollView>   
@@ -86,7 +80,14 @@ class DishDetail extends React.Component{
 const mapStateToProps = state=>{
     return {
         dishes: state.dishes,
-        comments: state.comments
+        comments: state.comments,
+        favorites: state.favorites
     }
 }
-export default connect (mapStateToProps)(DishDetail);
+
+const mapDispatchToProps = (dispatch) =>{
+    return{
+        postFavorite: (dishId) => dispatch(postFavorite(dishId))
+    }
+}
+export default connect (mapStateToProps, mapDispatchToProps)(DishDetail);

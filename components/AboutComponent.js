@@ -4,6 +4,8 @@ import { ListItem, Card} from 'react-native-elements';
 import { LEADERS } from '../shared/leaders';
 import {connect} from 'react-redux';
 import {baseUrl} from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
+
 
 function History(){
     return(
@@ -41,16 +43,38 @@ class About extends React.Component{
             )
         }  
         const {navigate } = this.props.navigation;
-        return(
-            <>
-            <History/>
-            <Card title='Corporate leadership'>
-                <FlatList data={this.props.leaders.leaders}
-                        renderItem={renderleaderItem}
-                        keyExtractor={item => item.id.toString()} />
-            </Card>
+        if (this.props.leaders.isLoading){
+            return (
+                <>
+                    <History/>
+                    <Card title='Corporate Leadership'>
+                        <Loading/>
+                    </Card>
+                </>
+            );
+        }
+        else if (this.props.leaders.errMess){
+            return(
+                <>
+                <History/>
+                <Card title='Corporate Leadership'>
+                    <Text>{this.props.leaders.errMess}</Text>
+                </Card>
             </>
-        )
+            )
+        }
+        else{
+            return(
+                <>
+                <History/>
+                <Card title='Corporate leadership'>
+                    <FlatList data={this.props.leaders.leaders}
+                            renderItem={renderleaderItem}
+                            keyExtractor={item => item.id.toString()} />
+                </Card>
+                </>
+            )
+        } 
     }
 }
 const mapStatesToProps = state => {
