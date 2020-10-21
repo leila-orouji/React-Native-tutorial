@@ -28,7 +28,7 @@ class Menu extends React.Component{
         if(this.props.dishes.isLoading){
             return (
                 <>
-                    <History/>
+
                     <Card title='Menu Dishes'>
                         <Loading/>
                     </Card>
@@ -38,7 +38,7 @@ class Menu extends React.Component{
         else if (this.props.dishes.errMess){
             return(
                 <>
-                <History/>
+             
                 <Card title='Menu dishes'>
                     <Text>{this.props.dishes.errMess}</Text>
                 </Card>

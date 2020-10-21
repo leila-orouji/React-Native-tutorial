@@ -5,6 +5,8 @@ import About from './AboutComponent';
 import Contact from './ContactComponent';
 import DishDetail from './DishDetailComponent';
 import Reservation from './ReservationComponent';
+import Favorites from './FavoriteComponent';
+import Login from './LoginComponent';
 import {Text, View, Platform, Image, StyleSheet, ScrollView } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
@@ -20,6 +22,23 @@ import { addComments, addPromotions, addLeaders, addDishes} from './../redux/act
 const stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
+function LoginNavigator() { 
+  return (
+    <stack.Navigator >
+      <stack.Screen name="Login" component={Login}  options={({ navigation })=>
+                       ({
+                        headerLeft: ()=> <Icon name='sign-in' size={24} color='white' 
+                                  onPress={() => navigation.toggleDrawer()} />,
+                                  title: 'login',
+                                  drawerLabel: 'login',
+                                  headerStyle:{backgroundColor: '#512DAB'},
+                                  headerTintColor: '#fff',
+                                  headerTitleStyle: {color: '#fff'}
+                    })
+    } />
+    </stack.Navigator>
+  );
+}
 
 function MenuNavigator() {
   return (
@@ -118,10 +137,32 @@ function ReservationNavigator() {
   );
 }
 
+function FavoriteNavigator() {
+  return (
+    <stack.Navigator>
+      <stack.Screen name="favorite" component={Favorites}  options={({ navigation })=>
+                       ({
+                        headerLeft: ()=> <Icon name='heart' size={24} color='red' 
+                                  onPress={() => navigation.toggleDrawer()} />,
+                                  title: 'Favorites',
+                                  drawerLabel: 'Favorites',
+                                  headerStyle:{backgroundColor: '#512DAB'},
+                                  headerTintColor: '#fff',
+                                  headerTitleStyle: {color: '#fff'}
+                    })
+    } />
+    </stack.Navigator>
+  );
+}
+
 const AppNavigator = () => ( 
   
     <NavigationContainer>
         <Drawer.Navigator initialRouteName="Home" drawerStyle={{backgroundColor:'#D1C4E9'}} drawerContent= {CustomDrawerContentComponent} >
+             <Drawer.Screen name="Login" component={LoginNavigator} options={{
+                  drawerIcon: ({tintColor}) => (
+                    <Icon name='sign-in' type='font-awesome' size={24} color={tintColor}  />
+                    ),}}/>
              <Drawer.Screen name="Menu" component={MenuNavigator} options={{
                   drawerIcon: ({tintColor}) => (
                     <Icon name='list' type='font-awesome' size={24} color={tintColor}  />
@@ -142,6 +183,10 @@ const AppNavigator = () => (
                   drawerIcon: ({tintColor}) => (
                     <Icon name='cutlery' type='font-awesome' size={22} color={tintColor}  />
                   )}}/>
+              <Drawer.Screen name="Favorites" component={FavoriteNavigator} options={{
+                  drawerIcon: ({tintColor}) => (
+                    <Icon name='heart' type='font-awesome' size={22} color={tintColor}  />
+                  )}}/>              
               
         </Drawer.Navigator> 
     </NavigationContainer>

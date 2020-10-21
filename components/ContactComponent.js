@@ -1,7 +1,8 @@
 import React from 'react';
-import{ FlatList} from 'react-native';
-import { ListItem} from 'react-native-elements';
+import{ View, Text} from 'react-native';
 import { LEADERS } from '../shared/leaders';
+import { Card, Button, Icon} from 'react-native-elements';
+import * as MailComposer from 'expo-mail-composer';
 
 class Contact extends React.Component{
 
@@ -16,25 +17,34 @@ class Contact extends React.Component{
         title: 'Contact'
     }
 
+    sendMail(){
+        MailComposer.composeAsync({
+            recipients: ['leila.orooji@gmail.com'],
+            subject: 'Enquiry',
+            body: 'To whome it may concern'
+        })
+    }
     
     render(){
-       const renderleaderItem = ({item, index})=> {
-            return(
-                <ListItem key={index}
-                          title = {item.name}
-                          subtitle={item.description}
-                          hideChevron={true} 
-                        //   onPress={() => this.props.navigation.navigate('DishDetail', {dishId: item.id})}
-                        //   leftAvatar={{rounded: true, size:'medium', source: require('./images/fruits.png')}} 
-                        />
-            )
-        }
-        const {navigate } = this.props.navigation;
         return(
-            <FlatList data={this.state.leaders}
-                      renderItem={renderleaderItem}
-                      keyExtractor={item => item.id.toString()} />
+            <>
+            <View>
+                <Card title='Contact Information'>
+                    <Text style={{margin: 10}}>121, Clear street</Text>
+                    <Text style={{margin: 10}}>Country: ... </Text>
+                    <Text style={{margin: 10}}>Tell: ...</Text>
+                    <Text style={{margin: 10}}>Fax: ...</Text>
+                    <Text style={{margin: 10}}>Email: ...</Text>
+                    <Button title='Send Email' 
+                            buttonStyle={{backgroundColor:'#512DBA'}}
+                            icon = {<Icon name='envolp-0' type='font-awesome'color='white'/>}
+                            onPress={this.sendMail}
+                    />
+                </Card>
+            </View>
+          </>
         )
+     
     }
 
 }

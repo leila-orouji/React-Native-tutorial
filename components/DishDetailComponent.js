@@ -1,26 +1,84 @@
 import React from 'react';
-import{Text, View, ScrollView, FlatList} from 'react-native';
+import{Text, View, ScrollView, FlatList, Alert, PanResponder, Share} from 'react-native';
 import { Card, Icon} from 'react-native-elements';
-import {DISHES} from './../shared/dishes';
-import {COMMENTS} from '../shared/comments';
 import{baseUrl} from '../shared/baseUrl';
 import{connect} from 'react-redux';
 import {postFavorite} from '../redux/actionCreator';
 
 function RenderDish(props){
     const dish = props.dish;
+    const shareDish = (title, message, url) =>{
+        Share.share({
+            title: title,
+            message: title+':'+message+ ' '+ url,
+            url: url
+        },{
+            dialogTitle: 'Share' + title
+        })
+    }
+    const recognizeDrag =({moveX, moveY, dx, dy}) =>{
+        if (dx< -200)     //move from Rightt to left
+            return true;
+        else
+            return false;
+    }
 
+    const panResponder = PanResponder.create({
+        onStartShouldSetPanResponder: (event, gestureState) =>{
+            return true;
+        },
+        onPanResponderEnd: (event, gestureState ) =>{
+            if (recognizeDrag(gestureState))
+                Alert.alert(
+                    'Add to Favorite',
+                    'Are you sure you wish to add'+ dish.name +'to your favorites?',
+                    [
+                        { text: 'Ask me later',
+                                 onPress: () => console.log('Ask me later pressed')
+                        },
+                        { text: 'Cancel',
+                                onPress: () => console.log('Cancel Pressed'),
+                                style: 'cancel'
+                        },
+                        { text: 'OK', onPress: () => props.favorite ? console.log('Already favorite') : props.onPress() }
+                    ],
+                    { cancelable: false }
+                )
+            return true;
+        }
+    })
+    
     if (dish != null ){
         return(
-            <Card featuredTitle={dish.name}
-                  image={{uri: baseUrl+dish.image}}>
-                <Text style={{margin:10}}>
-                    {dish.description}
-                    {dish.price}
-                </Text>
-                <Icon raised reverse name={props.favorite ? 'heart' : 'heart-o'} type='font-awesome' color='#f50' 
-                      onPress={() => props.favorite ? console.log('Already favorite') : props.onPress()} />
-            </Card>
+            <View {...panResponder.panHandlers}>
+                <Card featuredTitle={dish.name}
+                    image={{uri: baseUrl+dish.image}}>
+                    <Text style={{margin:10}}>
+                        {dish.description}
+                        {dish.price}
+                    </Text>
+                    <Icon raised
+                          reverse 
+                          name={props.favorite ? 'heart' : 'heart-o'} 
+                          type='font-awesome' color='#f50' 
+                          onPress={() => props.favorite ? console.log('Already favorite') : props.onPress()} 
+                    />
+                    <Icon raised 
+                          reverse 
+                          name={'pencil'} 
+                          type='font-awesome' 
+                          color='#512DAB' 
+                          onPress={() => console.log('Edit the dish')}
+                     />
+                    <Icon raised
+                          reverse 
+                          name='share'
+                          type='font-awesome'
+                          color='#5102AB'
+                          onPress={()=> shareDish(dish.name, dish.description, baseUrl+dish.image)}
+                    />
+                </Card>
+            </View>
         );
     } 
     else{
