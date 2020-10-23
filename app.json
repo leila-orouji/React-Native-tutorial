@@ -5,8 +5,15 @@
     "name": "muppalaConfusion",
     "slug": "muppalaConfusion",
     "version": "1.0.0",
+    "icon": "./images1.png",
     "assetBundlePatterns": [
       "**/*"
-    ]
+    ],
+    "ios": {
+      "bundleIdentifier": "net.food.muppalaConfusion"
+    },
+    "android":{
+     "package" : "net.food.muppalaConfusion"
+    }
   }
 }
